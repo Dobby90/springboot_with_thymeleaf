@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/default">
+
+    <th:block layout:fragment="content">
+        <div class="fixed-navbar">
+			<div class="pull-left">
+				<h1 class="page-title">게시판 상세</h1>
+			</div>
+		</div>
+        <div class="card-content">
+			<form class="form-horizontal form-view" th:object="${board}">
+				<div class="form-group">
+					<label for="inp-type-1" class="col-sm-2 control-label">제목</label>
+					<div class="col-sm-8">
+						<p class="form-control" th:text="*{title}"></p>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inp-type-5" class="col-sm-2 control-label">내용</label>
+					<div class="col-sm-8">
+						<p class="form-control" th:text="*{contents}"></p>
+					</div>
+				</div>
+                <div class="form-group">
+					<label for="inp-type-2" class="col-sm-2 control-label">이름</label>
+					<div class="col-sm-8">
+						<p class="form-control" th:text="*{creUser}"></p>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inp-type-5" class="col-sm-2 control-label">등록일</label>
+					<div class="col-sm-8">
+						<p class="form-control" th:text="*{#temporals.format( creDttm, 'yyyy-MM-dd HH:mm:ss' )}"></p>
+					</div>
+				</div>
+			</form>
+			<div class="btn_wrap text-center">
+				<a th:href="@{/board/boardList}" class="btn btn-default waves-effect waves-light">뒤로가기</a>
+				<a th:href="@{/board/boardWrite( noticeNo=${board.noticeNo} )}" class="btn btn-primary waves-effect waves-light">수정하기</a>
+				<button type="button" class="btn btn-danger waves-effect waves-light" th:onclick="deleteBoard([[ ${board.noticeNo} ]])">삭제하기</button>
+			</div>
+		</div>
+        <script th:inline="javascript">
+			/*<![CDATA[*/
+			function deleteBoard(noticeNo) {
+				if (confirm(noticeNo + "번 게시글을 삭제할까요?")) {
+					var thUri = /*[[ @{/board/deleteBoard} ]]*/ null; // validation 체크 이슈..
+					var uri = "/board/deleteBoard";
+					var html = "";
+
+					html += '<form name="dataForm" action="' + uri + '" method="post">';
+					html += '<input type="hidden" name=[[ ${_csrf.parameterName} ]] value=[[ ${_csrf.token} ]] />' // spring security (Cross site request forgery :: 사이트 간 요청 위조)
+					// $('meta[name="_csrf"]').attr('content')
+ 					html += '<input type="hidden" name="noticeNo" value="' + noticeNo + '" />';
+					html += '</form>';
+
+					$("body").append(html);
+					document.dataForm.submit();
+				}
+			}
+            jQuery(function() {
+                console.log("jquery stage")
+            });
+			/*]]>*/
+		</script>
+    </th:block>
+
+</html>

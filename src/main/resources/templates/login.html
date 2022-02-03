@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/defaultLogin">
+<head>
+    <title>Prometheus Demo</title>
+</head>
+<body layout:fragment="content">
+    <div class="container centered text-center" style="width: 400px;">
+        <h1 class="h3 mb-3 font-weight-normal">Prometheus Demo</h1>
+        <p>&nbsp;</p>
+        <form class="form-signin" method="POST" th:action="@{/login}">
+            <!-- <h1 class="h3 mb-3 font-weight-normal">[[${login_message}]]</h1> -->
+            <label for="userId" class="sr-only">ID</label>
+                <input type="text" id="username" name="username" class="form-control" placeholder="ID" required="" autofocus="">
+            <label for="password" class="sr-only">Password</label>
+                <input type="password" id="password" name="password" class="form-control" placeholder="Password" required="">
+            <div align="center" th:if="${param.error}">
+                <p style="font-size: 20; color: #FF1C19;">ID 또는 Password가 맞지 않습니다. 다시 입력해주세요.</p>
+            </div>
+            <p>&nbsp;</p>
+            <button class="btn btn-primary btn-block" type="submit">로그인</button>
+        </form>
+    </div>
+</body>
+</html>

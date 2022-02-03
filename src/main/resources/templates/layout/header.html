@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+	<header th:fragment="headerFragment">
+		<div style="width: 100%; height: 65px;">
+			<div style="width: 110px; float: right; margin: 10px 10px 0px 10px;">
+				<form class="form-signout" method="POST" th:action="@{/logout}">
+					<button class="btn btn-primary btn-block" type="submit"><b>로그아웃</b></button>
+				</form>
+			</div>
+			<div style="float: right; height:40px; font-size: 18px; margin-top: 20px;">
+				<span th:text="${userId}"></span>님 반갑습니다.
+			</div>
+			<p style="clear: both;">&nbsp;</p>
+		</div>
+	</header>
+
+</html>

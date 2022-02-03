@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jasonsystem.demo.repository.UserMapper">
+    <select id="selectUserId" resultType="UserVO">
+        SELECT
+            A.USER_ID,
+            A.PASSWORD,
+            A.NAME,
+            A.ROLE_CD,
+            B.ROLE_NM
+        FROM
+            DEMO_USER A, DEMO_ROLE B
+        WHERE
+            A.ROLE_CD = B.ROLE_CD
+        AND
+            USER_ID = #{userId}
+    </select>
+
+</mapper>

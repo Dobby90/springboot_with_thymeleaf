@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	<!-- [head] 영역 시작 -->
+	<head th:replace="layout/head :: headFragment">
+		<title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">Prometheus Demo</title>
+	</head>
+	<!-- [head] 영역 끝 -->
+
+	<body>
+		<!-- [header] 영역 시작 -->
+		<header th:replace="layout/header :: headerFragment"></header>
+		<!-- [header] 영역 끝 -->
+		
+		<!-- [content] 영역 시작 -->
+		<div layout:fragment="content"></div>
+		<!-- [content] 영역 끝 -->
+		
+		<!-- [footer] 영역 시작 -->
+		<footer th:replace="layout/footer :: footerFragment"></footer>
+		<!-- [footer] 영역 끝 -->
+	</body>
+</html>

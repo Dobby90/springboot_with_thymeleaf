@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jasonsystem.demo.repository.BoardMapper">
+    <select id="selectBoardList" resultType="NoticeVO">
+		SELECT
+			NOTICE_NO,
+			TITLE,
+			CONTENTS,
+			CRE_USER,
+			CRE_DTTM
+		FROM
+            DEMO_NOTICE
+		ORDER BY
+			CRE_DTTM DESC
+	</select>
+
+    <select id="selectBoardCount" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+            DEMO_NOTICE
+		ORDER BY
+			CRE_DTTM DESC
+	</select>
+
+    <select id="selectBoardInfo" parameterType="String" resultType="NoticeVO">
+		SELECT
+			NOTICE_NO,
+			TITLE,
+			CONTENTS,
+			CRE_USER,
+			CRE_DTTM
+		FROM
+            DEMO_NOTICE
+		WHERE
+			NOTICE_NO = #{noticeNo}
+	</select>
+    
+    <insert id="insertBoard" parameterType="com.jasonsystem.demo.dto.NoticeDTO">
+		INSERT INTO DEMO_NOTICE (
+			TITLE,
+			CONTENTS,
+			CRE_USER,
+			CRE_DTTM
+		) VALUES (
+			#{title},
+			#{contents},
+			#{creUser},
+			NOW()
+		)
+	</insert>
+
+    <update id="updateBoard" parameterType="com.jasonsystem.demo.dto.NoticeDTO">
+		UPDATE
+			DEMO_NOTICE
+		SET
+			TITLE = #{title},
+			CONTENTS = #{contents}
+		WHERE
+			NOTICE_NO = #{noticeNo}
+	</update>
+
+	<delete id="deleteBoard" parameterType="String">
+		DELETE 
+        FROM 
+            DEMO_NOTICE
+		WHERE
+			NOTICE_NO = #{noticeNo}
+	</delete>
+
+</mapper>
